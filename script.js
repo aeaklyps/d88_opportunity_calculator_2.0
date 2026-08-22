@@ -1,8 +1,373 @@
 /* ==========================================
-   STORAGE
+   D88 EVALUATION FRAMEWORK
+   WEBSITE + OPPORTUNITY SCORING
 ========================================== */
 
 const STORAGE_KEY = "d88_businesses";
+
+
+/* ==========================================
+   WEBSITE SCORE CATEGORIES
+========================================== */
+
+const WEBSITE_CATEGORIES = [
+
+    {
+        id: "performance",
+        name: "Performance",
+        weight: 15
+    },
+
+    {
+        id: "mobile",
+        name: "Mobile Responsiveness",
+        weight: 15
+    },
+
+    {
+        id: "design",
+        name: "Visual Design & Modernity",
+        weight: 15
+    },
+
+    {
+        id: "ux",
+        name: "UX / Navigation",
+        weight: 15
+    },
+
+    {
+        id: "cta",
+        name: "Calls-to-Action",
+        weight: 10
+    },
+
+    {
+        id: "content",
+        name: "Content & Information",
+        weight: 10
+    },
+
+    {
+        id: "accessibility",
+        name: "Accessibility",
+        weight: 10
+    },
+
+    {
+        id: "technical",
+        name: "Technical / Structural Quality",
+        weight: 10
+    }
+
+];
+
+
+/* ==========================================
+   OPPORTUNITY SCORE CATEGORIES
+========================================== */
+
+const OPPORTUNITY_CATEGORIES = [
+
+    {
+        id: "revenuePotential",
+        name: "Revenue / Customer Potential",
+        weight: 20
+    },
+
+    {
+        id: "growthPotential",
+        name: "Growth Potential",
+        weight: 15
+    },
+
+    {
+        id: "websiteImportance",
+        name: "Website Importance to Sales",
+        weight: 15
+    },
+
+    {
+        id: "targetMarket",
+        name: "Target Market / Reach",
+        weight: 10
+    },
+
+    {
+        id: "competitiveOpportunity",
+        name: "Competitive Opportunity",
+        weight: 10
+    },
+
+    {
+        id: "digitalDependence",
+        name: "Digital Dependence",
+        weight: 10
+    },
+
+    {
+        id: "redesignLikelihood",
+        name: "Redesign Likelihood",
+        weight: 10
+    },
+
+    {
+        id: "d88Fit",
+        name: "D88 Fit / Outreach Potential",
+        weight: 10
+    }
+
+];
+
+
+/* ==========================================
+   CALCULATE WEIGHTED SCORE
+========================================== */
+
+function calculateWeightedScore(
+    categories,
+    scores
+) {
+
+    let total = 0;
+
+    categories.forEach(function(category) {
+
+        const element =
+            document.getElementById(category.id);
+
+        let score;
+
+        if (element) {
+
+            score =
+                Number(element.value);
+
+        } else {
+
+            score =
+                Number(scores[category.id]) || 0;
+        }
+
+        total +=
+            score *
+            (category.weight / 100);
+
+    });
+
+    return Math.round(total * 10) / 10;
+}
+
+
+/* ==========================================
+   WEBSITE SCORE
+========================================== */
+
+function calculateWebsiteScore() {
+
+    return calculateWeightedScore(
+        WEBSITE_CATEGORIES,
+        {}
+    );
+}
+
+
+/* ==========================================
+   OPPORTUNITY SCORE
+========================================== */
+
+function calculateOpportunityScore() {
+
+    return calculateWeightedScore(
+        OPPORTUNITY_CATEGORIES,
+        {}
+    );
+}
+
+
+/* ==========================================
+   IMPROVEMENT POTENTIAL
+========================================== */
+
+function calculateImprovementPotential(
+    websiteScore
+) {
+
+    return Math.round(
+        (100 - websiteScore) * 10
+    ) / 10;
+}
+
+
+/* ==========================================
+   PRIORITY SCORE
+========================================== */
+
+/*
+    Improvement Potential = 40%
+
+    Opportunity Score = 60%
+*/
+
+function calculatePriorityScore(
+    websiteScore,
+    opportunityScore
+) {
+
+    const improvementPotential =
+        calculateImprovementPotential(
+            websiteScore
+        );
+
+    const priority =
+        (
+            improvementPotential *
+            0.40
+        ) +
+        (
+            opportunityScore *
+            0.60
+        );
+
+    return Math.round(priority * 10) / 10;
+}
+
+
+/* ==========================================
+   PRIORITY LABEL
+========================================== */
+
+function getPriorityLabel(score) {
+
+    if (score >= 80) {
+
+        return "HIGH PRIORITY";
+
+    }
+
+    if (score >= 60) {
+
+        return "GOOD PRIORITY";
+
+    }
+
+    if (score >= 40) {
+
+        return "MODERATE PRIORITY";
+
+    }
+
+    return "LOW PRIORITY";
+}
+
+
+/* ==========================================
+   WEBSITE LABEL
+========================================== */
+
+function getWebsiteLabel(score) {
+
+    if (score >= 80) {
+
+        return "STRONG WEBSITE";
+
+    }
+
+    if (score >= 60) {
+
+        return "DECENT WEBSITE";
+
+    }
+
+    if (score >= 40) {
+
+        return "NEEDS IMPROVEMENT";
+
+    }
+
+    return "POOR / OUTDATED";
+}
+
+
+/* ==========================================
+   OPPORTUNITY LABEL
+========================================== */
+
+function getOpportunityLabel(score) {
+
+    if (score >= 80) {
+
+        return "EXCELLENT OPPORTUNITY";
+
+    }
+
+    if (score >= 60) {
+
+        return "GOOD OPPORTUNITY";
+
+    }
+
+    if (score >= 40) {
+
+        return "MODERATE OPPORTUNITY";
+
+    }
+
+    return "LOW OPPORTUNITY";
+}
+
+
+/* ==========================================
+   UPDATE SLIDER DISPLAY
+========================================== */
+
+function updateSliderValue(slider) {
+
+    const output =
+        document.getElementById(
+            slider.id + "Value"
+        );
+
+    if (!output) {
+
+        return;
+    }
+
+    output.textContent =
+        slider.value + "%";
+}
+
+
+/* ==========================================
+   INITIALIZE SLIDERS
+========================================== */
+
+function initializeSliders() {
+
+    const sliders =
+        document.querySelectorAll(
+            ".score-slider"
+        );
+
+    sliders.forEach(function(slider) {
+
+        updateSliderValue(
+            slider
+        );
+
+        slider.addEventListener(
+            "input",
+            function() {
+
+                updateSliderValue(
+                    slider
+                );
+
+            }
+        );
+
+    });
+}
 
 
 /* ==========================================
@@ -11,121 +376,308 @@ const STORAGE_KEY = "d88_businesses";
 
 function analyze() {
 
-    const businessInput = document.getElementById("business");
-    const websiteInput = document.getElementById("website");
+    const businessInput =
+        document.getElementById(
+            "business"
+        );
 
-    const businessName = businessInput.value.trim();
-    const website = websiteInput.value.trim();
+    const websiteInput =
+        document.getElementById(
+            "website"
+        );
 
-    if (businessName === "" || website === "") {
 
-        alert("Please enter a business name and website URL.");
+    if (!businessInput || !websiteInput) {
 
         return;
     }
 
 
-    let score = 0;
+    const businessName =
+        businessInput.value.trim();
+
+    let website =
+        websiteInput.value.trim();
 
 
-    /* Missing features increase opportunity score */
+    if (
+        businessName === "" ||
+        website === ""
+    ) {
 
-    if (!document.getElementById("mobile").checked) {
-        score += 20;
-    }
+        alert(
+            "Please enter a business name and website URL."
+        );
 
-    if (!document.getElementById("contact").checked) {
-        score += 20;
-    }
-
-    if (!document.getElementById("cta").checked) {
-        score += 20;
-    }
-
-    if (!document.getElementById("social").checked) {
-        score += 10;
-    }
-
-    if (!document.getElementById("design").checked) {
-        score += 30;
+        return;
     }
 
 
-    /* Determine priority */
+    /* ======================================
+       NORMALIZE URL
+    ====================================== */
 
-    let priority;
+    if (
+        !website.startsWith("http://") &&
+        !website.startsWith("https://")
+    ) {
 
-    if (score >= 70) {
-
-        priority = "High";
-
-    } else if (score >= 40) {
-
-        priority = "Medium";
-
-    } else {
-
-        priority = "Low";
+        website =
+            "https://" + website;
     }
 
 
-    /* Record testing time */
+    /* ======================================
+       CALCULATE SCORES
+    ====================================== */
 
-    const testedAt = new Date().toISOString();
+    const websiteScore =
+        calculateWebsiteScore();
 
 
-    /* Create business */
+    const opportunityScore =
+        calculateOpportunityScore();
+
+
+    const improvementPotential =
+        calculateImprovementPotential(
+            websiteScore
+        );
+
+
+    const priorityScore =
+        calculatePriorityScore(
+            websiteScore,
+            opportunityScore
+        );
+
+
+    const priority =
+        getPriorityLabel(
+            priorityScore
+        );
+
+
+    /* ======================================
+       COLLECT INDIVIDUAL WEBSITE SCORES
+    ====================================== */
+
+    const websiteScores = {};
+
+    WEBSITE_CATEGORIES.forEach(
+        function(category) {
+
+            const slider =
+                document.getElementById(
+                    category.id
+                );
+
+            websiteScores[
+                category.id
+            ] =
+                Number(slider.value);
+
+        }
+    );
+
+
+    /* ======================================
+       COLLECT INDIVIDUAL OPPORTUNITY SCORES
+    ====================================== */
+
+    const opportunityScores = {};
+
+    OPPORTUNITY_CATEGORIES.forEach(
+        function(category) {
+
+            const slider =
+                document.getElementById(
+                    category.id
+                );
+
+            opportunityScores[
+                category.id
+            ] =
+                Number(slider.value);
+
+        }
+    );
+
+
+    /* ======================================
+       CREATE BUSINESS
+    ====================================== */
 
     const business = {
 
-        id: Date.now(),
+        id:
+            Date.now(),
 
-        name: businessName,
+        name:
+            businessName,
 
-        website: website,
+        website:
+            website,
 
-        score: score,
+        websiteScores:
+            websiteScores,
 
-        priority: priority,
+        opportunityScores:
+            opportunityScores,
 
-        testedAt: testedAt
+        websiteScore:
+            websiteScore,
+
+        opportunityScore:
+            opportunityScore,
+
+        improvementPotential:
+            improvementPotential,
+
+        priorityScore:
+            priorityScore,
+
+        priority:
+            priority,
+
+        websiteLabel:
+            getWebsiteLabel(
+                websiteScore
+            ),
+
+        opportunityLabel:
+            getOpportunityLabel(
+                opportunityScore
+            ),
+
+        testedAt:
+            new Date().toISOString()
+
     };
 
 
-    /* Get existing businesses */
+    /* ======================================
+       SAVE
+    ====================================== */
 
-    let businesses = getBusinesses();
-
-
-    /* Add new business */
-
-    businesses.push(business);
+    let businesses =
+        getBusinesses();
 
 
-    /* Save */
+    businesses.push(
+        business
+    );
 
-    saveBusinesses(businesses);
+
+    saveBusinesses(
+        businesses
+    );
 
 
-    /* Show result */
+    /* ======================================
+       DISPLAY RESULT
+    ====================================== */
 
-    document.getElementById("result").innerHTML = `
+    const result =
+        document.getElementById(
+            "result"
+        );
 
-        <h2>OPPORTUNITY SCORE: ${score}/100</h2>
 
-        <h3>PRIORITY: ${priority.toUpperCase()}</h3>
+    result.innerHTML = `
+
+        <h2>
+            ANALYSIS COMPLETE
+        </h2>
+
+        <div class="result-scores">
+
+            <div class="result-score">
+
+                <span class="label">
+                    WEBSITE SCORE
+                </span>
+
+                <span class="number">
+                    ${Math.round(websiteScore)}
+                </span>
+
+            </div>
+
+
+            <div class="result-score">
+
+                <span class="label">
+                    OPPORTUNITY SCORE
+                </span>
+
+                <span class="number">
+                    ${Math.round(opportunityScore)}
+                </span>
+
+            </div>
+
+
+            <div class="result-score">
+
+                <span class="label">
+                    PRIORITY SCORE
+                </span>
+
+                <span class="number">
+                    ${Math.round(priorityScore)}
+                </span>
+
+            </div>
+
+        </div>
+
 
         <p>
-            ${businessName} has been saved to the database.
+            WEBSITE:
+            ${getWebsiteLabel(websiteScore)}
         </p>
 
         <p>
+            OPPORTUNITY:
+            ${getOpportunityLabel(opportunityScore)}
+        </p>
+
+        <p>
+            IMPROVEMENT POTENTIAL:
+            ${Math.round(improvementPotential)}/100
+        </p>
+
+        <p>
+            PRIORITY:
+            ${priority}
+        </p>
+
+        <p>
+            ${escapeHTML(businessName)}
+            has been saved to the database.
+        </p>
+
+        <p>
+
             <a href="businesses.html">
                 VIEW ALL BUSINESSES →
             </a>
+
         </p>
 
     `;
+
+
+    /* ======================================
+       SCROLL TO RESULT
+    ====================================== */
+
+    result.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
 }
 
 
@@ -135,7 +687,10 @@ function analyze() {
 
 function getBusinesses() {
 
-    const savedData = localStorage.getItem(STORAGE_KEY);
+    const savedData =
+        localStorage.getItem(
+            STORAGE_KEY
+        );
 
 
     if (!savedData) {
@@ -147,9 +702,17 @@ function getBusinesses() {
 
     try {
 
-        const businesses = JSON.parse(savedData);
+        const businesses =
+            JSON.parse(
+                savedData
+            );
 
-        if (Array.isArray(businesses)) {
+
+        if (
+            Array.isArray(
+                businesses
+            )
+        ) {
 
             return businesses;
 
@@ -173,11 +736,15 @@ function getBusinesses() {
    SAVE BUSINESSES
 ========================================== */
 
-function saveBusinesses(businesses) {
+function saveBusinesses(
+    businesses
+) {
 
     localStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify(businesses)
+        JSON.stringify(
+            businesses
+        )
     );
 }
 
@@ -189,10 +756,10 @@ function saveBusinesses(businesses) {
 function displayBusinesses() {
 
     const businessList =
-        document.getElementById("businessList");
+        document.getElementById(
+            "businessList"
+        );
 
-
-    /* Don't run on other pages */
 
     if (!businessList) {
 
@@ -200,77 +767,142 @@ function displayBusinesses() {
     }
 
 
-    let businesses = getBusinesses();
+    let businesses =
+        getBusinesses();
 
 
     const sortElement =
-        document.getElementById("sort");
+        document.getElementById(
+            "sort"
+        );
 
 
     const sortOption =
-        sortElement ? sortElement.value : "priority";
+        sortElement
+            ? sortElement.value
+            : "priority";
 
 
     /* ======================================
-       SORT BY PRIORITY
+       SORT
     ====================================== */
 
-    if (sortOption === "priority") {
+    if (
+        sortOption ===
+        "priority"
+    ) {
 
-        const priorityValues = {
+        businesses.sort(
+            function(a, b) {
 
-            High: 3,
+                return (
+                    Number(
+                        b.priorityScore
+                    ) -
+                    Number(
+                        a.priorityScore
+                    )
+                );
 
-            Medium: 2,
+            }
+        );
 
-            Low: 1
-
-        };
+    }
 
 
-        businesses.sort(function(a, b) {
+    else if (
+        sortOption ===
+        "opportunity"
+    ) {
 
-            return (
-                priorityValues[b.priority] -
-                priorityValues[a.priority]
-            );
+        businesses.sort(
+            function(a, b) {
 
-        });
+                return (
+                    Number(
+                        b.opportunityScore
+                    ) -
+                    Number(
+                        a.opportunityScore
+                    )
+                );
+
+            }
+        );
+
+    }
+
+
+    else if (
+        sortOption ===
+        "website"
+    ) {
+
+        /*
+            Lower Website Score means
+            more room for improvement.
+        */
+
+        businesses.sort(
+            function(a, b) {
+
+                return (
+                    Number(
+                        a.websiteScore
+                    ) -
+                    Number(
+                        b.websiteScore
+                    )
+                );
+
+            }
+        );
+
+    }
+
+
+    else if (
+        sortOption ===
+        "recent"
+    ) {
+
+        businesses.sort(
+            function(a, b) {
+
+                return (
+                    new Date(
+                        b.testedAt
+                    ) -
+                    new Date(
+                        a.testedAt
+                    )
+                );
+
+            }
+        );
+
     }
 
 
     /* ======================================
-       SORT BY RECENT
+       EMPTY DATABASE
     ====================================== */
 
-    else if (sortOption === "recent") {
-
-        businesses.sort(function(a, b) {
-
-            return (
-                new Date(b.testedAt) -
-                new Date(a.testedAt)
-            );
-
-        });
-    }
-
-
-    /* ======================================
-       NOTHING SAVED
-    ====================================== */
-
-    if (businesses.length === 0) {
+    if (
+        businesses.length === 0
+    ) {
 
         businessList.innerHTML = `
 
             <div class="business-card">
 
-                <h2>NO BUSINESSES FOUND</h2>
+                <h2>
+                    NO BUSINESSES FOUND
+                </h2>
 
                 <p>
-                    Test a website to add a business
-                    to the database.
+                    Test a website to add a
+                    business to the database.
                 </p>
 
             </div>
@@ -281,76 +913,223 @@ function displayBusinesses() {
     }
 
 
-    /* Clear old display */
+    /* ======================================
+       CLEAR DISPLAY
+    ====================================== */
 
-    businessList.innerHTML = "";
+    businessList.innerHTML =
+        "";
 
 
     /* ======================================
-       CREATE BUSINESS CARDS
+       CREATE CARDS
     ====================================== */
 
-    businesses.forEach(function(business) {
+    businesses.forEach(
+        function(business) {
+
+            const date =
+                new Date(
+                    business.testedAt
+                ).toLocaleString();
 
 
-        const date =
-            new Date(
-                business.testedAt
-            ).toLocaleString();
+            const websiteScore =
+                Number(
+                    business.websiteScore
+                ) || 0;
 
 
-        const card =
-            document.createElement("div");
+            const opportunityScore =
+                Number(
+                    business.opportunityScore
+                ) || 0;
 
 
-        card.className =
-            "business-card";
+            const priorityScore =
+                Number(
+                    business.priorityScore
+                ) || 0;
 
 
-        card.innerHTML = `
+            const improvementPotential =
+                Number(
+                    business.improvementPotential
+                ) || 0;
 
-            <h2>
-                ${escapeHTML(business.name)}
-            </h2>
 
-            <p>
-                <a
-                    href="${escapeHTML(business.website)}"
-                    target="_blank"
-                    rel="noopener noreferrer"
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "business-card";
+
+
+            card.innerHTML = `
+
+                <h2>
+                    ${escapeHTML(
+                        business.name
+                    )}
+                </h2>
+
+
+                <p>
+
+                    <a
+                        href="${escapeHTML(
+                            business.website
+                        )}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        ${escapeHTML(
+                            business.website
+                        )}
+                    </a>
+
+                </p>
+
+
+                <div class="business-scores">
+
+
+                    <div class="business-score">
+
+                        <span class="score-number">
+                            ${Math.round(
+                                websiteScore
+                            )}
+                        </span>
+
+                        <span class="score-name">
+                            WEBSITE
+                        </span>
+
+                    </div>
+
+
+                    <div class="business-score">
+
+                        <span class="score-number">
+                            ${Math.round(
+                                opportunityScore
+                            )}
+                        </span>
+
+                        <span class="score-name">
+                            OPPORTUNITY
+                        </span>
+
+                    </div>
+
+
+                    <div class="business-score">
+
+                        <span class="score-number">
+                            ${Math.round(
+                                priorityScore
+                            )}
+                        </span>
+
+                        <span class="score-name">
+                            PRIORITY
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <p>
+
+                    <strong>
+                        WEBSITE:
+                    </strong>
+
+                    ${escapeHTML(
+                        business.websiteLabel ||
+                        getWebsiteLabel(
+                            websiteScore
+                        )
+                    )}
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        OPPORTUNITY:
+                    </strong>
+
+                    ${escapeHTML(
+                        business.opportunityLabel ||
+                        getOpportunityLabel(
+                            opportunityScore
+                        )
+                    )}
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        IMPROVEMENT POTENTIAL:
+                    </strong>
+
+                    ${Math.round(
+                        improvementPotential
+                    )}/100
+
+                </p>
+
+
+                <div class="business-priority">
+
+                    PRIORITY:
+                    ${escapeHTML(
+                        business.priority ||
+                        getPriorityLabel(
+                            priorityScore
+                        )
+                    )}
+
+                </div>
+
+
+                <p>
+
+                    <strong>
+                        TESTED:
+                    </strong>
+
+                    ${date}
+
+                </p>
+
+
+                <button
+                    class="delete-button"
+                    onclick="deleteBusiness(${business.id})"
                 >
-                    ${escapeHTML(business.website)}
-                </a>
-            </p>
+                    DELETE
+                </button>
 
-            <p>
-                <strong>SCORE:</strong>
-                ${business.score}/100
-            </p>
-
-            <p>
-                <strong>PRIORITY:</strong>
-                ${business.priority.toUpperCase()}
-            </p>
-
-            <p>
-                <strong>TESTED:</strong>
-                ${date}
-            </p>
-
-            <button
-                class="delete-button"
-                onclick="deleteBusiness(${business.id})"
-            >
-                DELETE
-            </button>
-
-        `;
+            `;
 
 
-        businessList.appendChild(card);
+            businessList.appendChild(
+                card
+            );
 
-    });
+        }
+    );
+
 }
 
 
@@ -360,51 +1139,77 @@ function displayBusinesses() {
 
 function deleteBusiness(id) {
 
-    let businesses = getBusinesses();
+    let businesses =
+        getBusinesses();
 
 
     businesses =
-        businesses.filter(function(business) {
+        businesses.filter(
+            function(business) {
 
-            return business.id !== id;
+                return (
+                    business.id !== id
+                );
 
-        });
+            }
+        );
 
 
-    saveBusinesses(businesses);
+    saveBusinesses(
+        businesses
+    );
 
 
     displayBusinesses();
+
 }
 
 
 /* ==========================================
-   BASIC HTML ESCAPING
+   HTML ESCAPING
 ========================================== */
 
 function escapeHTML(value) {
 
     return String(value)
 
-        .replace(/&/g, "&amp;")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
 
-        .replace(/</g, "&lt;")
+        .replace(
+            /</g,
+            "&lt;"
+        )
 
-        .replace(/>/g, "&gt;")
+        .replace(
+            />/g,
+            "&gt;"
+        )
 
-        .replace(/"/g, "&quot;")
+        .replace(
+            /"/g,
+            "&quot;"
+        )
 
-        .replace(/'/g, "&#039;");
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
 }
 
 
 /* ==========================================
-   LOAD DATABASE WHEN PAGE OPENS
+   PAGE INITIALIZATION
 ========================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
     function() {
+
+        initializeSliders();
 
         displayBusinesses();
 
