@@ -1,3 +1,8 @@
+/* ==========================================
+   D88 EVALUATION FRAMEWORK
+   MAIN STYLESHEET
+========================================== */
+
 * {
     box-sizing: border-box;
 }
@@ -17,9 +22,9 @@ body {
 }
 
 
-/* =========================
+/* ==========================================
    BACKGROUND
-========================= */
+========================================== */
 
 .grid-background {
     position: fixed;
@@ -42,9 +47,9 @@ body {
 }
 
 
-/* =========================
+/* ==========================================
    CONTAINERS
-========================= */
+========================================== */
 
 .home-container {
     position: relative;
@@ -63,6 +68,8 @@ body {
 }
 
 .container {
+    position: relative;
+
     width: 92%;
     max-width: 1250px;
 
@@ -76,9 +83,9 @@ body {
 }
 
 
-/* =========================
+/* ==========================================
    BRAND
-========================= */
+========================================== */
 
 .brand {
     position: relative;
@@ -102,9 +109,9 @@ body {
 }
 
 
-/* =========================
+/* ==========================================
    GENERAL TEXT
-========================= */
+========================================== */
 
 .eyebrow {
     color: #51ddca;
@@ -133,7 +140,6 @@ h1 {
 }
 
 .description {
-
     margin-top: 25px;
 
     color: #65d9cf;
@@ -146,21 +152,23 @@ h1 {
 }
 
 .instructions {
-
     font-size: 8px;
 
     color: #4edcca;
 
     letter-spacing: 1px;
+
+    line-height: 1.8;
+
+    max-width: 650px;
 }
 
 
-/* =========================
+/* ==========================================
    HOME
-========================= */
+========================================== */
 
 .home-main {
-
     position: relative;
 
     min-height: 600px;
@@ -171,7 +179,6 @@ h1 {
 }
 
 .home-text {
-
     position: relative;
 
     z-index: 3;
@@ -182,12 +189,11 @@ h1 {
 }
 
 
-/* =========================
+/* ==========================================
    HOME FLOWER
-========================= */
+========================================== */
 
 .home-flower {
-
     position: absolute;
 
     z-index: 2;
@@ -210,7 +216,6 @@ h1 {
 }
 
 .home-flower img {
-
     width: 100%;
 
     max-width: 570px;
@@ -229,12 +234,11 @@ h1 {
 }
 
 
-/* =========================
+/* ==========================================
    HOME BUTTONS
-========================= */
+========================================== */
 
 .home-buttons {
-
     position: relative;
 
     z-index: 5;
@@ -249,7 +253,6 @@ h1 {
 }
 
 .main-button {
-
     display: block;
 
     width: 280px;
@@ -277,7 +280,6 @@ h1 {
 }
 
 .main-button span {
-
     display: block;
 
     margin-top: 8px;
@@ -290,7 +292,6 @@ h1 {
 }
 
 .main-button:hover {
-
     background: rgba(50, 220, 200, 0.12);
 
     box-shadow:
@@ -300,19 +301,17 @@ h1 {
 }
 
 .secondary-button {
-
     border-color: #b9a4e9;
 
     color: #d0c1f5;
 }
 
 
-/* =========================
+/* ==========================================
    HUD
-========================= */
+========================================== */
 
 .hud {
-
     position: absolute;
 
     z-index: 5;
@@ -336,21 +335,22 @@ h1 {
 
 .hud-left {
     left: 0;
+
     bottom: 30px;
 }
 
 .hud-right {
     right: 0;
+
     top: 100px;
 }
 
 
-/* =========================
+/* ==========================================
    OTHER PAGES
-========================= */
+========================================== */
 
 .back-link {
-
     display: inline-block;
 
     margin: 30px 0;
@@ -364,8 +364,11 @@ h1 {
     text-decoration: none;
 }
 
-.page-layout {
+.back-link:hover {
+    color: #ffffff;
+}
 
+.page-layout {
     position: relative;
 
     display: flex;
@@ -373,22 +376,64 @@ h1 {
     min-height: 700px;
 }
 
-.form-section,
-.business-section {
+.form-section {
+    width: 65%;
 
+    padding: 30px 20px;
+}
+
+.business-section {
     width: 65%;
 
     padding: 30px 20px;
 }
 
 
-/* =========================
+/* ==========================================
+   EVALUATION SECTIONS
+========================================== */
+
+.evaluation-section {
+    margin-top: 45px;
+
+    padding: 25px 0 5px;
+
+    border-top: 1px solid rgba(70, 220, 200, 0.18);
+}
+
+.section-heading {
+    margin-bottom: 25px;
+
+    color: #65e5d7;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+}
+
+.section-heading span {
+    display: block;
+
+    margin-top: 7px;
+
+    color: #718b89;
+
+    font-size: 7px;
+
+    letter-spacing: 1.5px;
+}
+
+.opportunity-heading {
+    color: #c8b5f2;
+}
+
+
+/* ==========================================
    INPUTS
-========================= */
+========================================== */
 
-input:not([type="checkbox"]),
+input:not([type="range"]),
 select {
-
     width: 100%;
 
     padding: 14px;
@@ -406,9 +451,8 @@ select {
     outline: none;
 }
 
-input:not([type="checkbox"]):focus,
+input:not([type="range"]):focus,
 select:focus {
-
     border-color: #53dfcd;
 
     box-shadow:
@@ -416,13 +460,12 @@ select:focus {
 }
 
 
-/* =========================
+/* ==========================================
    FORM LABELS
-========================= */
+========================================== */
 
-.form-section > label:not(.check),
-.business-section > label {
-
+.form-section > label,
+.form-section label:not(.score-header label) {
     display: block;
 
     font-size: 8px;
@@ -433,12 +476,216 @@ select:focus {
 }
 
 
-/* =========================
+/* ==========================================
+   SCORE ITEMS
+========================================== */
+
+.score-item {
+    margin: 0 0 30px;
+
+    padding: 0 0 20px;
+
+    border-bottom: 1px solid rgba(70, 220, 200, 0.08);
+}
+
+.score-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 14px;
+}
+
+.score-header > div {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-width: 0;
+}
+
+.score-header label {
+    display: inline-block;
+
+    margin: 0;
+
+    color: #59dccc;
+
+    font-size: 8px;
+
+    letter-spacing: 1.5px;
+
+    cursor: default;
+}
+
+.weight {
+    color: #596f6d;
+
+    font-size: 7px;
+
+    letter-spacing: 1px;
+
+    white-space: nowrap;
+}
+
+.score-header output {
+    min-width: 42px;
+
+    text-align: right;
+
+    color: #63e5d5;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+}
+
+.score-description {
+    margin: 10px 0 0;
+
+    color: #627875;
+
+    font-size: 7px;
+
+    line-height: 1.7;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* ==========================================
+   THIN SCORE SLIDERS
+========================================== */
+
+.score-slider {
+    display: block;
+
+    width: 100%;
+
+    height: 18px;
+
+    margin: 0;
+
+    padding: 0;
+
+    background: transparent;
+
+    border: none;
+
+    outline: none;
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    cursor: pointer;
+}
+
+
+/* Chrome / Edge / Safari */
+
+.score-slider::-webkit-slider-runnable-track {
+    width: 100%;
+
+    height: 2px;
+
+    background: #315b58;
+
+    border: none;
+
+    border-radius: 0;
+}
+
+.score-slider::-webkit-slider-thumb {
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    width: 10px;
+
+    height: 10px;
+
+    margin-top: -4px;
+
+    border-radius: 50%;
+
+    border: 1px solid #63e5d5;
+
+    background: #030505;
+
+    box-shadow:
+        0 0 7px rgba(80, 230, 215, 0.45);
+
+    cursor: pointer;
+}
+
+
+/* Firefox */
+
+.score-slider::-moz-range-track {
+    width: 100%;
+
+    height: 2px;
+
+    background: #315b58;
+
+    border: none;
+
+    border-radius: 0;
+}
+
+.score-slider::-moz-range-progress {
+    height: 2px;
+
+    background: #4edcca;
+}
+
+.score-slider::-moz-range-thumb {
+    width: 10px;
+
+    height: 10px;
+
+    border-radius: 50%;
+
+    border: 1px solid #63e5d5;
+
+    background: #030505;
+
+    box-shadow:
+        0 0 7px rgba(80, 230, 215, 0.45);
+
+    cursor: pointer;
+}
+
+
+/* Opportunity slider */
+
+.opportunity-slider::-webkit-slider-thumb {
+    border-color: #c8b5f2;
+
+    box-shadow:
+        0 0 7px rgba(180, 150, 240, 0.4);
+}
+
+.opportunity-slider::-moz-range-thumb {
+    border-color: #c8b5f2;
+
+    box-shadow:
+        0 0 7px rgba(180, 150, 240, 0.4);
+}
+
+
+/* ==========================================
    CHECKBOXES
-========================= */
+========================================== */
 
 .check {
-
     display: block;
 
     margin: 18px 0;
@@ -451,19 +698,17 @@ select:focus {
 }
 
 .check input {
-
     margin-right: 12px;
 
     accent-color: #50dfcd;
 }
 
 
-/* =========================
+/* ==========================================
    BUTTONS
-========================= */
+========================================== */
 
 button {
-
     padding: 15px 25px;
 
     margin-top: 25px;
@@ -482,21 +727,29 @@ button {
 }
 
 button:hover {
-
     background: rgba(70, 220, 200, 0.12);
 
     box-shadow:
         0 0 15px rgba(70, 220, 200, 0.2);
 }
 
+.analyze-button {
+    width: 100%;
 
-/* =========================
+    margin-top: 35px;
+
+    padding: 18px;
+
+    font-size: 10px;
+}
+
+
+/* ==========================================
    RESULT
-========================= */
+========================================== */
 
 #result {
-
-    margin-top: 30px;
+    margin-top: 35px;
 
     padding: 25px;
 
@@ -506,19 +759,89 @@ button:hover {
 }
 
 #result h2 {
+    margin-top: 0;
 
     color: #65e5d7;
+
+    font-size: 18px;
+
+    letter-spacing: 1px;
+}
+
+#result h3 {
+    color: #c8b5f2;
+
+    font-size: 13px;
+
+    letter-spacing: 1px;
+}
+
+#result p {
+    color: #829795;
+
+    font-size: 8px;
+
+    line-height: 1.8;
+
+    letter-spacing: 1px;
+}
+
+#result a {
+    color: #55dccc;
+}
+
+
+/* ==========================================
+   RESULT SCORE GRID
+========================================== */
+
+.result-scores {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+
+    margin: 25px 0;
+}
+
+.result-score {
+    padding: 15px 10px;
+
+    border: 1px solid rgba(70, 220, 200, 0.2);
+
+    text-align: center;
+
+    background: rgba(0, 20, 20, 0.25);
+}
+
+.result-score .number {
+    display: block;
+
+    margin-top: 8px;
+
+    color: #63e5d5;
 
     font-size: 20px;
 }
 
+.result-score .label {
+    display: block;
 
-/* =========================
+    color: #718b89;
+
+    font-size: 6px;
+
+    letter-spacing: 1px;
+}
+
+
+/* ==========================================
    SIDE FLOWER
-========================= */
+========================================== */
 
 .side-flower {
-
     position: absolute;
 
     right: 0;
@@ -536,10 +859,11 @@ button:hover {
     justify-content: center;
 
     opacity: 0.75;
+
+    pointer-events: none;
 }
 
 .side-flower .flower {
-
     width: 100%;
 
     max-height: 650px;
@@ -548,19 +872,17 @@ button:hover {
 }
 
 
-/* =========================
+/* ==========================================
    BUSINESS DATABASE
-========================= */
+========================================== */
 
 .sort-area {
-
     width: 300px;
 
-    margin: 25px 0;
+    margin: 25px 0 35px;
 }
 
 .sort-area label {
-
     display: block;
 
     margin-bottom: 10px;
@@ -573,8 +895,7 @@ button:hover {
 }
 
 .business-card {
-
-    padding: 20px;
+    padding: 22px;
 
     margin: 15px 0;
 
@@ -584,30 +905,83 @@ button:hover {
 }
 
 .business-card h2 {
-
     margin: 0 0 10px;
 
-    font-size: 14px;
+    font-size: 13px;
 
     letter-spacing: 1px;
 }
 
 .business-card p {
-
     color: #829795;
 
     font-size: 8px;
 
     letter-spacing: 1px;
+
+    line-height: 1.7;
 }
 
 .business-card a {
-
     color: #55dccc;
+
+    word-break: break-all;
+}
+
+.business-scores {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 8px;
+
+    margin: 20px 0;
+}
+
+.business-score {
+    padding: 12px 8px;
+
+    border: 1px solid rgba(70, 220, 200, 0.15);
+
+    text-align: center;
+}
+
+.business-score .score-number {
+    display: block;
+
+    color: #63e5d5;
+
+    font-size: 15px;
+
+    margin-bottom: 5px;
+}
+
+.business-score .score-name {
+    display: block;
+
+    color: #667d7a;
+
+    font-size: 6px;
+
+    letter-spacing: 0.8px;
+}
+
+.business-priority {
+    margin-top: 18px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid rgba(70, 220, 200, 0.1);
+
+    color: #c8b5f2;
+
+    font-size: 8px;
+
+    letter-spacing: 1.5px;
 }
 
 .delete-button {
-
     border-color: #775555;
 
     color: #d89090;
@@ -617,8 +991,13 @@ button:hover {
     padding: 8px 12px;
 }
 
-.small-button {
+.delete-button:hover {
+    background: rgba(150, 70, 70, 0.12);
 
+    box-shadow: none;
+}
+
+.small-button {
     display: block;
 
     width: 220px;
@@ -627,31 +1006,33 @@ button:hover {
 }
 
 
-/* =========================
+/* ==========================================
    MOBILE
-========================= */
+========================================== */
 
 @media (max-width: 800px) {
 
     .home-container {
-
         padding: 25px;
     }
 
-    .home-main {
+    .container {
+        width: 94%;
 
+        padding: 25px 20px;
+    }
+
+    .home-main {
         min-height: 650px;
     }
 
     .home-text {
-
         width: 100%;
 
         padding-left: 0;
     }
 
     .home-flower {
-
         left: 15%;
 
         width: 85%;
@@ -660,7 +1041,6 @@ button:hover {
     }
 
     .home-buttons {
-
         flex-direction: column;
 
         align-items: center;
@@ -669,28 +1049,39 @@ button:hover {
     }
 
     .main-button {
-
         width: 90%;
     }
 
     .hud {
-
         display: none;
     }
 
     .page-layout {
-
         display: block;
     }
 
     .form-section,
     .business-section {
-
         width: 100%;
     }
 
     .side-flower {
-
         display: none;
+    }
+
+    .result-scores {
+        grid-template-columns: 1fr;
+    }
+
+    .business-scores {
+        grid-template-columns: 1fr;
+    }
+
+    .score-header label {
+        font-size: 7px;
+    }
+
+    .score-description {
+        font-size: 6px;
     }
 }
