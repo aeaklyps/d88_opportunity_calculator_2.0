@@ -13,7 +13,9 @@
 
     <div class="container page-container">
 
-        <a href="index.html" class="back-link">← RETURN HOME</a>
+        <a href="index.html" class="back-link">
+            ← RETURN HOME
+        </a>
 
         <div class="brand">
             D88 EVALUATION FRAMEWORK
@@ -24,67 +26,726 @@
 
             <div class="form-section">
 
-                <p class="eyebrow">ANALYSIS UNIT // 001</p>
-
-                <h1>TEST A WEBSITE</h1>
-
-                <label>BUSINESS NAME</label>
-
-                <input
-                    id="business"
-                    type="text"
-                    placeholder="Enter business name"
-                >
-
-                <label>WEBSITE URL</label>
-
-                <input
-                    id="website"
-                    type="text"
-                    placeholder="https://example.com"
-                >
-
-                <label>WEBSITE EVALUATION</label>
-
-                <p class="instructions">
-                    CHECK THE FEATURES THE WEBSITE DOES HAVE.
+                <p class="eyebrow">
+                    ANALYSIS UNIT // 001
                 </p>
 
-                <label class="check">
-                    <input type="checkbox" id="mobile">
-                    Mobile friendly
-                </label>
+                <h1>
+                    TEST A WEBSITE
+                </h1>
 
-                <label class="check">
-                    <input type="checkbox" id="contact">
-                    Contact information is easy to find
-                </label>
 
-                <label class="check">
-                    <input type="checkbox" id="cta">
-                    Clear call-to-action
-                </label>
+                <!-- =========================
+                     BUSINESS INFORMATION
+                ========================== -->
 
-                <label class="check">
-                    <input type="checkbox" id="social">
-                    Social media links
-                </label>
+                <section class="evaluation-section">
 
-                <label class="check">
-                    <input type="checkbox" id="design">
-                    Modern design
-                </label>
+                    <div class="section-heading">
+                        BUSINESS INFORMATION
+                    </div>
 
-                <button onclick="analyze()">
-                    ANALYZE WEBSITE
+                    <label for="business">
+                        BUSINESS NAME
+                    </label>
+
+                    <input
+                        id="business"
+                        type="text"
+                        placeholder="Enter business name"
+                    >
+
+                    <label for="website">
+                        WEBSITE URL
+                    </label>
+
+                    <input
+                        id="website"
+                        type="text"
+                        placeholder="https://example.com"
+                    >
+
+                </section>
+
+
+                <!-- =========================
+                     WEBSITE SCORE
+                ========================== -->
+
+                <section class="evaluation-section">
+
+                    <div class="section-heading">
+                        WEBSITE SCORE
+                        <span>QUALITY OF EXISTING WEBSITE</span>
+                    </div>
+
+                    <p class="instructions">
+                        RATE EACH CATEGORY FROM 0 TO 100.
+                        HIGHER SCORES INDICATE A STRONGER WEBSITE.
+                    </p>
+
+
+                    <!-- PERFORMANCE -->
+
+                    <div class="score-item">
+
+                        <div class="score-header">
+
+                            <div>
+                                <label for="performance">
+                                    PERFORMANCE
+                                </label>
+
+                                <span class="weight">
+                                    15%
+                                </span>
+                            </div>
+
+                            <output id="performanceValue">
+                                50%
+                            </output>
+
+                        </div>
+
+                        <input
+                            type="range"
+                            id="performance"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="score-slider"
+                        >
+
+                        <p class="score-description">
+                            Loading speed, optimization, and responsiveness.
+                        </p>
+
+                    </div>
+
+
+                    <!-- MOBILE -->
+
+                    <div class="score-item">
+
+                        <div class="score-header">
+
+                            <div>
+                                <label for="mobile">
+                                    MOBILE RESPONSIVENESS
+                                </label>
+
+                                <span class="weight">
+                                    15%
+                                </span>
+                            </div>
+
+                            <output id="mobileValue">
+                                50%
+                            </output>
+
+                        </div>
+
+                        <input
+                            type="range"
+                            id="mobile"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="score-slider"
+                        >
+
+                        <p class="score-description">
+                            Quality and usability on phones and tablets.
+                        </p>
+
+                    </div>
+
+
+                    <!-- DESIGN -->
+
+                    <div class="score-item">
+
+                        <div class="score-header">
+
+                            <div>
+                                <label for="design">
+                                    VISUAL DESIGN & MODERNITY
+                                </label>
+
+                                <span class="weight">
+                                    15%
+                                </span>
+                            </div>
+
+                            <output id="designValue">
+                                50%
+                            </output>
+
+                        </div>
+
+                        <input
+                            type="range"
+                            id="design"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="score-slider"
+                        >
+
+                        <p class="score-description">
+                            Visual quality, consistency, professionalism, and modernity.
+                        </p>
+
+                    </div>
+
+
+                    <!-- UX -->
+
+                    <div class="score-item">
+
+                        <div class="score-header">
+
+                            <div>
+                                <label for="ux">
+                                    UX / NAVIGATION
+                                </label>
+
+                                <span class="weight">
+                                    15%
+                                </span>
+                            </div>
+
+                            <output id="uxValue">
+                                50%
+                            </output>
+
+                        </div>
+
+                        <input
+                            type="range"
+                            id="ux"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="score-slider"
+                        >
+
+                        <p class="score-description">
+                            Ease of navigation, organization, and usability.
+                        </p>
+
+                    </div>
+
+
+                    <!-- CTA -->
+
+                    <div class="score-item">
+
+                        <div class="score-header">
+
+                            <div>
+                                <label for="cta">
+                                    CALLS-TO-ACTION
+                                </label>
+
+                                <span class="weight">
+                                    10%
+                                </span>
+                            </div>
+
+                            <output id="ctaValue">
+                                50%
+                            </output>
+
+                        </div>
+
+                        <input
+                            type="range"
+                            id="cta"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="score-slider"
+                        >
+
+                        <p class="score-description">
+                            Clarity, visibility, placement, and effectiveness of CTAs.
+                        </p>
+
+                    </div>
+
+
+                    <!-- CONTENT -->
+
+                    <div class="score-item">
+
+                        <div class="score-header">
+
+                            <div>
+                                <label for="content">
+                                    CONTENT & INFORMATION
+                                </label>
+
+                                <span class="weight">
+                                    10%
+                                </span>
+                            </div>
+
+                            <output id="contentValue">
+                                50%
+                            </output>
+
+                        </div>
+
+                        <input
+                            type="range"
+                            id="content"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="score-slider"
+                        >
+
+                        <p class="score-description">
+                            Quality, completeness, organization, and readability.
+                        </p>
+
+                    </div>
+
+
+                    <!-- ACCESSIBILITY -->
+
+                    <div class="score-item">
+
+                        <div class="score-header">
+
+                            <div>
+                                <label for="accessibility">
+                                    ACCESSIBILITY
+                                </label>
+
+                                <span class="weight">
+                                    10%
+                                </span>
+                            </div>
+
+                            <output id="accessibilityValue">
+                                50%
+                            </output>
+
+                        </div>
+
+                        <input
+                            type="range"
+                            id="accessibility"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="score-slider"
+                        >
+
+                        <p class="score-description">
+                            Contrast, readability, alt text, and accessible structure.
+                        </p>
+
+                    </div>
+
+
+                    <!-- TECHNICAL -->
+
+                    <div class="score-item">
+
+                        <div class="score-header">
+
+                            <div>
+                                <label for="technical">
+                                    TECHNICAL / STRUCTURAL QUALITY
+                                </label>
+
+                                <span class="weight">
+                                    10%
+                                </span>
+                            </div>
+
+                            <output id="technicalValue">
+                                50%
+                            </output>
+
+                        </div>
+
+                        <input
+                            type="range"
+                            id="technical"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="score-slider"
+                        >
+
+                        <p class="score-description">
+                            Broken elements, links, technical issues, and page structure.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =========================
+                     OPPORTUNITY SCORE
+                ========================== -->
+
+                <section class="evaluation-section">
+
+                    <div class="section-heading opportunity-heading">
+                        OPPORTUNITY SCORE
+                        <span>VALUE OF PURSUING THIS BUSINESS</span>
+                    </div>
+
+                    <p class="instructions">
+                        RATE THE BUSINESS BASED ON ITS POTENTIAL VALUE
+                        AS A D88 CLIENT. HIGHER SCORES INDICATE A STRONGER
+                        BUSINESS OPPORTUNITY.
+                    </p>
+
+
+                    <!-- REVENUE -->
+
+                    <div class="score-item">
+
+                        <div class="score-header">
+
+                            <div>
+                                <label for="revenuePotential">
+                                    REVENUE / CUSTOMER POTENTIAL
+                                </label>
+
+                                <span class="weight">
+                                    20%
+                                </span>
+                            </div>
+
+                            <output id="revenuePotentialValue">
+                                50%
+                            </output>
+
+                        </div>
+
+                        <input
+                            type="range"
+                            id="revenuePotential"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="score-slider opportunity-slider"
+                        >
+
+                        <p class="score-description">
+                            Potential value of gaining additional customers.
+                        </p>
+
+                    </div>
+
+
+                    <!-- GROWTH -->
+
+                    <div class="score-item">
+
+                        <div class="score-header">
+
+                            <div>
+                                <label for="growthPotential">
+                                    GROWTH POTENTIAL
+                                </label>
+
+                                <span class="weight">
+                                    15%
+                                </span>
+                            </div>
+
+                            <output id="growthPotentialValue">
+                                50%
+                            </output>
+
+                        </div>
+
+                        <input
+                            type="range"
+                            id="growthPotential"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="score-slider opportunity-slider"
+                        >
+
+                        <p class="score-description">
+                            Potential for the business to grow through stronger digital presence.
+                        </p>
+
+                    </div>
+
+
+                    <!-- WEBSITE IMPORTANCE -->
+
+                    <div class="score-item">
+
+                        <div class="score-header">
+
+                            <div>
+                                <label for="websiteImportance">
+                                    WEBSITE IMPORTANCE TO SALES
+                                </label>
+
+                                <span class="weight">
+                                    15%
+                                </span>
+                            </div>
+
+                            <output id="websiteImportanceValue">
+                                50%
+                            </output>
+
+                        </div>
+
+                        <input
+                            type="range"
+                            id="websiteImportance"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="score-slider opportunity-slider"
+                        >
+
+                        <p class="score-description">
+                            Importance of the website to attracting and converting customers.
+                        </p>
+
+                    </div>
+
+
+                    <!-- TARGET MARKET -->
+
+                    <div class="score-item">
+
+                        <div class="score-header">
+
+                            <div>
+                                <label for="targetMarket">
+                                    TARGET MARKET / REACH
+                                </label>
+
+                                <span class="weight">
+                                    10%
+                                </span>
+                            </div>
+
+                            <output id="targetMarketValue">
+                                50%
+                            </output>
+
+                        </div>
+
+                        <input
+                            type="range"
+                            id="targetMarket"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="score-slider opportunity-slider"
+                        >
+
+                        <p class="score-description">
+                            Size and accessibility of the potential customer base.
+                        </p>
+
+                    </div>
+
+
+                    <!-- COMPETITIVE -->
+
+                    <div class="score-item">
+
+                        <div class="score-header">
+
+                            <div>
+                                <label for="competitiveOpportunity">
+                                    COMPETITIVE OPPORTUNITY
+                                </label>
+
+                                <span class="weight">
+                                    10%
+                                </span>
+                            </div>
+
+                            <output id="competitiveOpportunityValue">
+                                50%
+                            </output>
+
+                        </div>
+
+                        <input
+                            type="range"
+                            id="competitiveOpportunity"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="score-slider opportunity-slider"
+                        >
+
+                        <p class="score-description">
+                            Potential for a stronger website to improve competitiveness.
+                        </p>
+
+                    </div>
+
+
+                    <!-- DIGITAL -->
+
+                    <div class="score-item">
+
+                        <div class="score-header">
+
+                            <div>
+                                <label for="digitalDependence">
+                                    DIGITAL DEPENDENCE
+                                </label>
+
+                                <span class="weight">
+                                    10%
+                                </span>
+                            </div>
+
+                            <output id="digitalDependenceValue">
+                                50%
+                            </output>
+
+                        </div>
+
+                        <input
+                            type="range"
+                            id="digitalDependence"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="score-slider opportunity-slider"
+                        >
+
+                        <p class="score-description">
+                            How strongly the business depends on online discovery and interaction.
+                        </p>
+
+                    </div>
+
+
+                    <!-- REDESIGN -->
+
+                    <div class="score-item">
+
+                        <div class="score-header">
+
+                            <div>
+                                <label for="redesignLikelihood">
+                                    REDESIGN LIKELIHOOD
+                                </label>
+
+                                <span class="weight">
+                                    10%
+                                </span>
+                            </div>
+
+                            <output id="redesignLikelihoodValue">
+                                50%
+                            </output>
+
+                        </div>
+
+                        <input
+                            type="range"
+                            id="redesignLikelihood"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="score-slider opportunity-slider"
+                        >
+
+                        <p class="score-description">
+                            Likelihood that the business would benefit from or consider a redesign.
+                        </p>
+
+                    </div>
+
+
+                    <!-- D88 FIT -->
+
+                    <div class="score-item">
+
+                        <div class="score-header">
+
+                            <div>
+                                <label for="d88Fit">
+                                    D88 FIT / OUTREACH POTENTIAL
+                                </label>
+
+                                <span class="weight">
+                                    10%
+                                </span>
+                            </div>
+
+                            <output id="d88FitValue">
+                                50%
+                            </output>
+
+                        </div>
+
+                        <input
+                            type="range"
+                            id="d88Fit"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="score-slider opportunity-slider"
+                        >
+
+                        <p class="score-description">
+                            How well the business fits D88's target market and outreach strategy.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =========================
+                     ANALYZE
+                ========================== -->
+
+                <button
+                    class="analyze-button"
+                    onclick="analyze()"
+                >
+                    ANALYZE & SAVE WEBSITE
                 </button>
+
+
+                <!-- =========================
+                     RESULT
+                ========================== -->
 
                 <div id="result"></div>
 
             </div>
 
+
+            <!-- SIDE FLOWER -->
+
             <div class="side-flower">
-                <img src="flower.png" class="flower" alt="">
+
+                <img
+                    src="flower.png"
+                    class="flower"
+                    alt=""
+                >
+
             </div>
 
         </div>
